@@ -1,33 +1,38 @@
 <div id='nf-add-movie'>
   <nf-nav></nf-nav>
   <div class='container'>
-    <div class='form-horizontal'>
-      <div class='form-group'>
-        <input type='text' class='form-control' id='title' placeholder='Title'>
-      </div>
-      <div class='form-group'>
-        <input type='text' class='form-control' id='year' placeholder='Year'>
-      </div>
-      <div class='form-group'>
-        <input type='text' class='form-control' id='genre' placeholder='Genre'>
-      </div>
-      <div class='form-group'>
-        <input type='text' class='form-control' id='rating' placeholder='Actors'>
-      </div>
-      <div class='form-group'>
-        <label>Rating</label>
-      </div>
-      <div class='text-center'>
-        <button
+    <form>
+      <div class='form-inline text-center'>
+        <div class='form-group'>
+          <input
+            [(ngModel)]='searchText'
+            (ngModelChange)='handleSearchMovie(searchText)'
+            name='searchText'
+            type='text'
+            class='form-control'
+            id='title'
+            placeholder='Search Movie Title'>
+        </div>
+        <!--in case API can't handle change-->
+        <!--<button
+          (click)='handleSearchMovie(searchText)'
           type='submit'
           class='btn btn-default'>
-          Save
-        </button>
+          Search
+        </button>-->
       </div>
+    </form>
+    <div
+      (click)='handleSuggestionSubmit(suggestion)'
+      *ngFor='let suggestion of suggestions' >
+        <p>id: {{suggestion.id}}</p>
+        <p>title: {{suggestion.title}}</p>
+        <p>release date: {{suggestion.release_date}}</p>
+        <p>overview: {{suggestion.overview}}</p>
+        <p>release date: {{suggestion.release_date}}</p>
+        <p>rating: {{suggestion.vote_average}}</p>
+        <p>img url: http://image.tmdb.org/t/p/w500/{{suggestion.poster_path}}</p>
+        <hr>
     </div>
-  </div>
-  <hr>
-  <div class='container text-center'>
-    <h3>Use Suggestion Instead?</h3>
   </div>
 </div>
