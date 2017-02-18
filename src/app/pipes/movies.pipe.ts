@@ -4,11 +4,10 @@ import {Pipe, Injectable, PipeTransform } from '@angular/core';
 @Pipe({
     name: 'moviesFilter'
 })
+
 @Injectable()
 export class MoviesPipe implements PipeTransform {
   transform(movies: any[], filterValue : string): any[] {
-    console.log('movies', movies)
-    console.log('value', filterValue)
     if (!filterValue) { return movies }
     if (filterValue.length < 1) { return movies }
     let filter = filterValue.split(/[ ]+/)

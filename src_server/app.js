@@ -13,7 +13,6 @@ const cookieParser = require('cookie-parser')
 const router = require('./routes/apiRouter.js')
 
 let app = express()
-
 // We're in development or production mode
 // create and run a real server.
 // Parse incoming request bodies as JSON
@@ -27,16 +26,16 @@ if (process.env.NODE_ENV !== 'production') {
   // Use morgan to log requests to our express server to the console
   app.use(morgan('dev'))
 } else {
+  // production build not working as spected with angular cli
+  // const distFolder = path.resolve(__dirname, '../dist/')
+  // app.use('/dist', express.static(distFolder))
 
-  const distFolder = path.resolve(__dirname, '../dist/')
-  app.use('/dist', express.static(distFolder))
+  // const nodeModules = path.resolve(__dirname, '../node_modules/')
+  // app.use('/node_modules', express.static(nodeModules))
 
-  const nodeModules = path.resolve(__dirname, '../node_modules/')
-  app.use('/node_modules', express.static(nodeModules))
-
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../dist/index.html'))
-  })
+  // app.get('*', (req, res) => {
+  //   res.sendFile(path.join(__dirname, '../dist/index.html'))
+  // })
 }
 
 // Start the server!

@@ -2,7 +2,7 @@
 var db = require('mongoose')
 db.Promise = require('bluebird')
 // Configure mongoose with the correct environment configuration Mongolab URL or localhost
-var config = { dbUrl: 'mongodb://localhost/ReactFlix' }
+var config = { dbUrl: 'mongodb://localhost/ngFlix' }
 
 // Connect to DB specifiying URL
 db.connect(config.dbUrl)

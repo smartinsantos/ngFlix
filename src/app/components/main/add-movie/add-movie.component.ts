@@ -1,3 +1,4 @@
+const toastr = require('toastr')
 import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router'
 import { MovieService } from '../../../services/movie.service'
@@ -29,6 +30,7 @@ export class AddMovieComponent implements OnInit {
   handleSuggestionSubmit (suggestion) {
     let movie = {
       title: suggestion.title,
+      release_date: suggestion.release_date,
       tmdb_id: suggestion.id,
       rating: suggestion.vote_average,
       overview: suggestion.overview,
@@ -38,13 +40,13 @@ export class AddMovieComponent implements OnInit {
     .then((res) => {
       if (res.error) {
         if (res.message) {
-          // toastr.warning(`${res.message}`)
+          toastr.warning(`${res.message}`)
         } else {
-          // toastr.error('Error Ocurred')
+          toastr.error('Error Ocurred')
         }
       } else {
         this.router.navigate(['', 'main'])
-        // toastr.info(`Added ' ${res.data.title} '`)
+        toastr.info(`Added ' ${res.data.title} '`)
       }
     })
   }

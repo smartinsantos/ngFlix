@@ -4,7 +4,7 @@
     <div class='caption card-description-wrapper'>
       <h3>{{movie.title}}</h3>
       <div>
-        <p><strong>Release Date:</strong> {{movie.release_date}}</p>
+        <p><strong>Release Date:</strong> {{movie.release_date | date}}</p>
         <p><strong>Rating:</strong> {{movie.rating}} / 10</p>
         <p>{{movie.overview}}</p>
       </div>
