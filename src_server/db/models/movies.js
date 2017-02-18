@@ -2,8 +2,8 @@ const db = require('mongoose')
 const Schema = db.Schema
 
 const MovieSchema = new Schema({
-  title: { type: String, default: 'title' },
   tmdb_id: { type: String, default: null },
+  title: { type: String, default: 'title' },
   release_date: { type: String, default: 'date' },
   overview: { type: String, default: 'overview' },
   rating: { type: Number, default: 0 },

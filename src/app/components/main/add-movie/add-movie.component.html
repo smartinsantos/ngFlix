@@ -1,9 +1,12 @@
 <div id='nf-add-movie'>
   <nf-nav></nf-nav>
   <div class='container'>
-    <form>
-      <div class='form-inline text-center'>
-        <div class='form-group'>
+    <div class='form-horizontal search-wrapper'>
+      <div class='form-group'>
+        <div class="input-group">
+          <span
+            class='input-group-addon'
+            id='searchText-addon'><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
           <input
             [(ngModel)]='searchText'
             (ngModelChange)='handleSearchMovie(searchText)'
@@ -11,28 +14,32 @@
             type='text'
             class='form-control'
             id='title'
-            placeholder='Search Movie Title'>
+            placeholder='Search movie title'
+            aria-describedby='searchText-addon'>
         </div>
-        <!--in case API can't handle change-->
-        <!--<button
-          (click)='handleSearchMovie(searchText)'
-          type='submit'
-          class='btn btn-default'>
-          Search
-        </button>-->
       </div>
-    </form>
-    <div
-      (click)='handleSuggestionSubmit(suggestion)'
-      *ngFor='let suggestion of suggestions' >
-        <p>id: {{suggestion.id}}</p>
-        <p>title: {{suggestion.title}}</p>
-        <p>release date: {{suggestion.release_date}}</p>
-        <p>overview: {{suggestion.overview}}</p>
-        <p>release date: {{suggestion.release_date}}</p>
-        <p>rating: {{suggestion.vote_average}}</p>
-        <p>img url: http://image.tmdb.org/t/p/w500/{{suggestion.poster_path}}</p>
-        <hr>
+    </div>
+    <div *ngFor='let suggestion of suggestions' class='container'>
+      <div class='card-wrapper row'>
+        <div class='left-card col-xs-6 col-sm-3 col-md-2'>
+          <img
+            class='movie-pic'
+            src='http://image.tmdb.org/t/p/w500/{{suggestion.poster_path}}'
+            alt='movie-pic'>
+        </div>
+        <div class='right-card col-xs-6 col-sm-9 col-md-10'>
+          <p><strong>{{suggestion.title}}</strong> - <span>({{suggestion.release_date | date:"yyyy"}})</span></p>
+          <p>{{suggestion.overview}}</p>
+          <p>Rating: {{suggestion.vote_average}}</p>
+          <div class='text-center'>
+            <button
+              (click)='handleSuggestionSubmit(suggestion)'
+              class='btn btn-primary outline sharp'>
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

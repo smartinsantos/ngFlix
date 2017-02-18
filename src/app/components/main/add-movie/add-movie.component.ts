@@ -1,4 +1,6 @@
+import 'toastr/build/toastr.min.js'
 import { Component, OnInit } from '@angular/core';
+import { Router} from '@angular/router'
 import { MovieService } from '../../../services/movie.service'
 
 @Component({
@@ -11,7 +13,7 @@ export class AddMovieComponent implements OnInit {
   searchText = null
   suggestions = null
   showSuggestions = false
-  constructor(private movieService: MovieService) { }
+  constructor(private router: Router, private movieService: MovieService) { }
   ngOnInit() {}
   handleSearchMovie(searchText) {
     let query = `title=${searchText}`
@@ -37,11 +39,15 @@ export class AddMovieComponent implements OnInit {
     this.movieService.create(movie)
     .then((res) => {
       if (res.error) {
-        // toastr.error('Error Ocurred')
+        if (res.message) {
+          toastr.error(`${res.message}`)
+          this.router.navigate(['', 'main'])
+        } else {
+          toastr.error('Error Ocurred')
+        }
       } else {
-        // browserHistory.push('/main')
-        // toastr.success(`Added ' ${res.data.title} '`)
-        console.log('saved!', res)
+        this.router.navigate(['', 'main'])
+        toastr.info(`Added ' ${res.data.title} '`)
       }
     })
   }
