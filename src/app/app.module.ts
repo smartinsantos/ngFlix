@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 // Router
 import { Router } from './app.router'
+// Pipes
+import { MoviesPipe } from './pipes/movies.pipe'
 // Components
 import { AppComponent } from './app.component';
 import { LandingComponent } from './components/landing/landing.component';
@@ -20,7 +22,8 @@ import { ShowcardComponent } from './components/main/showcard/showcard.component
     MainComponent,
     NavComponent,
     AddMovieComponent,
-    ShowcardComponent
+    ShowcardComponent,
+    MoviesPipe
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,7 @@ import { ShowcardComponent } from './components/main/showcard/showcard.component
     HttpModule,
     Router,
   ],
-  providers: [],
+  providers: [MoviesPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
