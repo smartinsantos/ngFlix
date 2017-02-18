@@ -1,6 +1,10 @@
+const path = require('path')
+const express = require('express')
 const router = require('express').Router()
 // routers declarations
 const moviesRouter = require('./moviesRouter')
+
+
 
 // Add headers
 router.use(function (req, res, next) {
@@ -18,5 +22,7 @@ router.use(function (req, res, next) {
 })
 
 router.use('/movies', moviesRouter)
+assetFolder = path.resolve(__dirname, '../../', 'src', 'assets')
+router.use('/assets', express.static(assetFolder))
 
 module.exports = router

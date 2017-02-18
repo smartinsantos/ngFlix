@@ -1,12 +1,21 @@
 <div class='card-wrapper'>
   <div class='thumbnail'>
-    <img src={{movie.poster_url}} alt='...' class='card-img' />
+    <img src="{{movie.poster_url}}" alt='...' class='card-img' />
     <div class='caption card-description-wrapper'>
       <h3>{{movie.title}}</h3>
       <div>
-        <p>Release Date: {{movie.release_date}} - Rating: {{movie.rating}} / 10</p>
+        <p><strong>Release Date:</strong> {{movie.release_date}}</p>
+        <p><strong>Rating:</strong> {{movie.rating}} / 10</p>
         <p>{{movie.overview}}</p>
       </div>
     </div>
+    <hr>
+    <div *ngIf='!movie.aboutToRemove' (click)='aboutToRemove(movie)' class='trash-wrapper text-center'>
+      <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+    </div>
+    <div *ngIf='movie.aboutToRemove' (click)='removeMovie(movie)' class='trash-wrapper text-center'>
+      <span class='text-danger'>Sure?</span>
+    </div>
   </div>
 </div>
+

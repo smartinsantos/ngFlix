@@ -9,7 +9,15 @@
   max-height: 311px;
 }
 
-.card-wrapper:hover {
+.card-wrapper {
+  max-height: 600px;
+}
+
+hr {
+  margin: 0 0 16px 0;
+}
+
+.trash-wrapper:hover {
   text-decoration: none !important;
   cursor: pointer;
 }

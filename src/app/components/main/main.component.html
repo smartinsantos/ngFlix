@@ -1,13 +1,14 @@
 <div id='nf-main'>
-  <nf-nav search='true'></nf-nav>
+  <nf-nav></nf-nav>
   <div class='container'>
     <div class='text-center'>
-      <a [routerLink]='["","add"]' class='btn btn-default'>Add Movie</a>
+      <a [routerLink]='["","add"]' class='btn btn-primary outline sharp'>Add Movie</a>
     </div>
     <hr />
     <div class='row container'>
       <div *ngFor='let movie of movies' class='col-xs-12 col-sm-4 col-md-3 col-lg-3'>
           <nf-showcard
+            (onRemoved)='removeFromList($event)'
             [movie]='movie'>
           </nf-showcard>
       </div>

@@ -6,5 +6,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent {
-  @Input() search: Boolean = false
+  @Input() back: Boolean = false
 }

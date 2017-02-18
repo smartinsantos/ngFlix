@@ -1,7 +1,15 @@
 <div id='nf-add-movie'>
-  <nf-nav></nf-nav>
+  <nf-nav back='true'></nf-nav>
   <div class='container'>
-    <div class='form-horizontal search-wrapper'>
+    <div class='form-inline search-wrapper text-center'>
+      <button
+        class='btn btn-default'
+        [routerLink]='["","main"]'>
+        <span
+          class='glyphicon glyphicon-arrow-left'
+          aria-hidden='true'>
+        </span>
+      </button>
       <div class='form-group'>
         <div class="input-group">
           <span

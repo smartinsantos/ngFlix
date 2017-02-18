@@ -19,4 +19,12 @@ export class MainComponent implements OnInit {
     this.movieService.getAll()
     .then(res => this.movies = !res.error ? res.data : this.movies)
   }
+  removeFromList(movieId) {
+    this.movies.forEach((movie, index) => {
+      if (movie._id === movieId) {
+        this.movies.splice(index, 1)
+        return
+      }
+    })
+  }
 }
