@@ -8,7 +8,6 @@ const APP_ROUTES: Routes = [
   { path: '', component: LandingComponent },
   { path: 'main', component: MainComponent },
   { path: 'add', component: AddMovieComponent },
-  // { path: 'details/:id', component: EditMovie }
 ]
 
 export const Router = RouterModule.forRoot(APP_ROUTES)

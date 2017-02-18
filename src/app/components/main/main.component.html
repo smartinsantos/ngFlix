@@ -24,10 +24,10 @@
     </div>
     <div class='row container movies-wrapper'>
       <div *ngFor='let movie of movies | moviesFilter:filterValue' class='col-xs-12 col-sm-4 col-md-3 col-lg-3'>
-          <nf-showcard
-            (onRemoved)='removeFromList($event)'
-            [movie]='movie'>
-          </nf-showcard>
+        <nf-showcard
+          (onRemoved)='removeFromList($event)'
+          [movie]='movie'>
+        </nf-showcard>
       </div>
     </div>
   </div>
