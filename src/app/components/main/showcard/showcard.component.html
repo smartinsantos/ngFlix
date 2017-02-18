@@ -1,3 +1,12 @@
-<p>
-  showcard works!
-</p>
+<div class='card-wrapper'>
+  <div class='thumbnail'>
+    <img src={{movie.poster_url}} alt='...' class='card-img' />
+    <div class='caption card-description-wrapper'>
+      <h3>{{movie.title}}</h3>
+      <div>
+        <p>Release Date: {{movie.release_date}} - Rating: {{movie.rating}} / 10</p>
+        <p>{{movie.overview}}</p>
+      </div>
+    </div>
+  </div>
+</div>

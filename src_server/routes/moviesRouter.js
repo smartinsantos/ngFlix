@@ -56,42 +56,24 @@ router.get('/search/data', (req, res) => {
   }
 })
 
-// --- PUT METHODS
-// EDIT
-router.put('/:id', (req, res) => {
-  let editedMovie = req.body
-  Movies.findOne({_id: req.params.id})
-  .exec()
-  .then((movie) => {
-    if (!movie) {
-      res.status(400).json({ error: true, message: 'Bad Request', data: null })
-    } else {
-      movie.update(editedMovie, (err) => {
-        if (err) {
-          throw err
-        } else {
-          res.status(200).json({ error: false, data: movie })
-        }
-      })
-    }
-  })
-  .catch((err) => {
-    console.log('DB Error', err)
-    res.status(500).json({ error: true, message: 'DB Error', data: null })
-  })
-})
-
 // --- POST METHODS
 // CREATE
 router.post('/', (req, res) => {
   let newMovie = req.body
   let movie = new Movies(newMovie)
-  movie.save((err) => {
-    if (err) {
-      console.log('DB Error', err)
-      res.status(500).json({ error: true, message: 'DB Error', data: null })
+  Movies.findOne({ tmdb_id: req.body.tmdb_id })
+  .then((existing) => {
+    if (existing) {
+      res.status(201).json({ error: true, message: 'Movie already added!', data: null })
     } else {
-      res.status(200).json({ error: false, data: movie })
+      movie.save((err) => {
+        if (err) {
+          console.log('DB Error', err)
+          res.status(500).json({ error: true, message: null, data: null })
+        } else {
+          res.status(201).json({ error: false, data: movie })
+        }
+      })
     }
   })
 })

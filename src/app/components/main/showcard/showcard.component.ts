@@ -1,15 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'nf-showcard',
   templateUrl: './showcard.component.html',
   styleUrls: ['./showcard.component.css']
 })
-export class ShowcardComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class ShowcardComponent {
+  @Input() movie: Object = {}
+  constructor() {}
 }

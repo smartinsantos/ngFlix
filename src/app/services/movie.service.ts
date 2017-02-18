@@ -39,30 +39,8 @@ export class MovieService {
     })
   }
 
-  getData (query) {
-    return this.cAxios.get(`${this.url}/movies/data/find?${query}`)
-    .then((res) => {
-      return res.data.data
-    })
-    .catch((err) => {
-      console.log('Users Api Err: ', err)
-      return err
-    })
-  }
-
   create (movie) {
     return this.cAxios.post(`${this.url}/movies/`, movie)
-    .then((res) => {
-      return res.data
-    })
-    .catch((err) => {
-      console.log('Users Api Err: ', err)
-      return err
-    })
-  }
-
-  edit (movie) {
-    return this.cAxios.put(`${this.url}/movies/${movie._id}`, movie)
     .then((res) => {
       return res.data
     })

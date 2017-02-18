@@ -1,0 +1,15 @@
+.card-description-wrapper {
+  overflow-y: auto;
+  min-height: 200px;
+  max-height: 200px;
+}
+
+.card-img {
+  min-height: 311px;
+  max-height: 311px;
+}
+
+.card-wrapper:hover {
+  text-decoration: none !important;
+  cursor: pointer;
+}
