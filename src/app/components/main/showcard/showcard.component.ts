@@ -16,7 +16,7 @@ export class ShowcardComponent {
   }
   removeMovie(movie) {
     this.movieService.remove(movie._id)
-    .then((res)=>{
+    .then((res) => {
       if (!res.error) {
         this.onRemoved.emit(movie._id)
       }
