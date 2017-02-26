@@ -9,7 +9,7 @@ import { MoviesPipe } from '../../pipes/movies.pipe';
   providers: [MovieService]
 })
 export class MainComponent implements OnInit {
-  private movies = [];
+  private movies: any[] = [];
   constructor(private movieService: MovieService, private pipe: MoviesPipe) {}
   ngOnInit() {
     // fetch movies

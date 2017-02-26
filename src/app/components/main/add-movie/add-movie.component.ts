@@ -10,8 +10,8 @@ const toastr = require('toastr');
   providers: [MovieService]
 })
 export class AddMovieComponent implements OnInit {
-  searchText = null;
-  suggestions = null;
+  searchText: string  = null;
+  suggestions: any[] = null;
   showSuggestions = false;
   constructor(private router: Router, private movieService: MovieService) { }
   ngOnInit() {}
