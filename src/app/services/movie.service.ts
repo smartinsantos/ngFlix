@@ -1,63 +1,34 @@
 import { Injectable } from '@angular/core';
-import axios from 'axios'
+import { Http, Response } from '@angular/http';
+import 'rxjs/Rx';
+
 @Injectable()
 export class MovieService {
-  constructor() { }
-  private url = 'http://localhost:5200/api'
-  private cAxios = axios.create({ baseURL: this.url })
+  private url = 'http://localhost:5200/api';
+  constructor(private http: Http) {}
 
   getOne (id) {
-    return this.cAxios.get(`${this.url}/movies/${id}`)
-    .then((res) => {
-      return res.data
-    })
-    .catch((err) => {
-      console.log('Users Api Err: ', err)
-      return err
-    })
+    return this.http.get(`${this.url}/movies/${id}`)
+    .map((res: Response) => res.json());
   }
 
   getAll () {
-    return this.cAxios.get(`${this.url}/movies/`)
-    .then((res) => {
-      return res.data
-    })
-    .catch((err) => {
-      console.log('Users Api Err: ', err)
-      return err
-    })
+    return this.http.get(`${this.url}/movies/`)
+    .map((res: Response) => res.json());
   }
 
   search (query) {
-    return this.cAxios.get(`${this.url}/movies/search/data?${query}`)
-    .then((res) => {
-      return res.data.data
-    })
-    .catch((err) => {
-      console.log('Users Api Err: ', err)
-      return err
-    })
+    return this.http.get(`${this.url}/movies/search/data?${query}`)
+    .map((res: Response) => res.json());
   }
 
   create (movie) {
-    return this.cAxios.post(`${this.url}/movies/`, movie)
-    .then((res) => {
-      return res.data
-    })
-    .catch((err) => {
-      console.log('Users Api Err: ', err)
-      return err
-    })
+    return this.http.post(`${this.url}/movies/`, movie)
+    .map((res: Response) => res.json());
   }
 
   remove (id) {
-    return this.cAxios.delete(`${this.url}/movies/${id}`)
-    .then((res) => {
-      return res.data
-    })
-    .catch((err) => {
-      console.log('Users Api Err: ', err)
-      return err
-    })
+    return this.http.delete(`${this.url}/movies/${id}`)
+    .map((res: Response) => res.json());
   }
 }

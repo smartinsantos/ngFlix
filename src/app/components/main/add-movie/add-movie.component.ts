@@ -1,7 +1,7 @@
-const toastr = require('toastr')
 import { Component, OnInit } from '@angular/core';
-import { Router} from '@angular/router'
-import { MovieService } from '../../../services/movie.service'
+import { Router} from '@angular/router';
+import { MovieService } from '../../../services/movie.service';
+const toastr = require('toastr');
 
 @Component({
   selector: 'nf-add-movie',
@@ -10,44 +10,51 @@ import { MovieService } from '../../../services/movie.service'
   providers: [MovieService]
 })
 export class AddMovieComponent implements OnInit {
-  searchText = null
-  suggestions = null
-  showSuggestions = false
+  searchText = null;
+  suggestions = null;
+  showSuggestions = false;
   constructor(private router: Router, private movieService: MovieService) { }
   ngOnInit() {}
   handleSearchMovie(searchText) {
-    let query = `title=${searchText}`
+    let query = `title=${searchText}`;
     if (searchText.length > 0) {
       this.movieService.search(query)
-      .then((data) => {
-        if (data) {
-          this.showSuggestions = true
-          this.suggestions = data
+      .subscribe(
+        (res) => {
+          if (!res.error) {
+            this.showSuggestions = true;
+            this.suggestions = res.data;
+          }
         }
-      })
+      );
+    } else {
+      this.showSuggestions = false;
+      this.suggestions = null;
     }
   }
   handleSuggestionSubmit (suggestion) {
-    let movie = {
+    const movie = {
       title: suggestion.title,
       release_date: suggestion.release_date,
       tmdb_id: suggestion.id,
       rating: suggestion.vote_average,
       overview: suggestion.overview,
       poster_url: suggestion.poster_path ? `http://image.tmdb.org/t/p/w500/${suggestion.poster_path}` : null
-    }
+    };
     this.movieService.create(movie)
-    .then((res) => {
-      if (res.error) {
-        if (res.message) {
-          toastr.warning(`${res.message}`)
+    .subscribe(
+      (res) => {
+        if (res.error) {
+          if (res.message) {
+            toastr.warning(`${res.message}`);
+          } else {
+            toastr.error('Error Ocurred');
+          }
         } else {
-          toastr.error('Error Ocurred')
+          this.router.navigate(['', 'main']);
+          toastr.info(`Added ' ${res.data.title} '`);
         }
-      } else {
-        this.router.navigate(['', 'main'])
-        toastr.info(`Added ' ${res.data.title} '`)
       }
-    })
+    );
   }
 }

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Response } from '@angular/http'
-import { MovieService } from '../../services/movie.service'
-import { MoviesPipe } from '../../pipes/movies.pipe'
+import { MovieService } from '../../services/movie.service';
+import { MoviesPipe } from '../../pipes/movies.pipe';
 
 @Component({
   selector: 'nf-main',
@@ -10,21 +9,25 @@ import { MoviesPipe } from '../../pipes/movies.pipe'
   providers: [MovieService]
 })
 export class MainComponent implements OnInit {
-  movies = []
+  private movies = [];
   constructor(private movieService: MovieService, private pipe: MoviesPipe) {}
   ngOnInit() {
     // fetch movies
-    this.fetchMovies()
+    this.fetchMovies();
   }
   fetchMovies() {
     this.movieService.getAll()
-    .then(res => this.movies = !res.error ? res.data : this.movies)
+    .subscribe(
+      (res) => {
+        this.movies = !res.error ? res.data : this.movies;
+      }
+    );
   }
   removeFromList(movieId) {
     this.movies.forEach((movie, index) => {
       if (movie._id === movieId) {
-        this.movies.splice(index, 1)
+        this.movies.splice(index, 1);
       }
-    })
+    });
   }
 }
